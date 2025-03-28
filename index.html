@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Бот</title>
+</head>
+<body>
+    <h1>Задайте вопрос боту</h1>
+    <form method="POST">
+        <input type="text" name="question">
+        <input type="submit" value="Отправить">
+    </form>
+    {% if answer %}
+        <p><b>Ответ:</b> {{ answer }}</p>
+    {% endif %}
+</body>
+</html>
