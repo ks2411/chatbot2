@@ -3,11 +3,9 @@ import openai
 import os
 from config import MODEL, TEMP, VERBOSE
 from utils import remove_newlines
-from dotenv import load_dotenv
 
-load_dotenv()  # Загружаем переменные из .env
-openai.api_key = os.getenv("OPENAI_API_KEY")
-# Устанавливаем API-ключ из переменной окружения
+
+
 
 
 def get_hello(model, user_message, temp=TEMP, verbose=VERBOSE):

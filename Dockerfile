@@ -11,8 +11,6 @@ COPY . .
 # Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Задаём переменную окружения с API-ключом (замени на свой ключ!)
-ENV OPENAI_API_KEY= (=sk....)
 
 # Указываем команду для запуска бота
 CMD ["python", "main.py"]

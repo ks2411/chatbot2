@@ -1,6 +1,5 @@
 # sales_bot.py
 import openai
-from dotenv import load_dotenv
 
 import os
 from config import MODEL, TEMP, VERBOSE
@@ -8,8 +7,9 @@ from utils import remove_newlines
 from text_processing import summarize_dialog, extract_entity_from_statement
 from knowledge_base import get_knowledge_base
 
-# Установка API-ключа один раз на весь модуль
-load_dotenv()  # Загружаем переменные из .env
+
+
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def get_seller_answer(history_user, history_manager, history_chat):
