@@ -39,7 +39,7 @@ def get_seller_answer(history_user, history_manager, history_chat):
 
     # Генерация ответа продавца
     messages = [
-        {"role": "system", "content": "אתה מוכר במאפייה. ענה ללקוח בצורה הגיונית ורציפה."},
+        {"role": "system", "content": " בשום אופן אל תוסיף כלום חוץ מאינפורמציה שקיבלת תמיד תענה ללקוח בשפה של הלקוח אתה מוכר במאפייה. ענה ללקוח בצורה הגיונית ורציפה."},
 
 
         {"role": "user", "content": f"Диалог: {summarized_dialog}\n\nВопрос клиента: {history_user[-1]}\n\nОтвет:"}

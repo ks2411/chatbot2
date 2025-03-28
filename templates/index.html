@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Bot Chat</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('/static/bakery_products.png'); /* Замените на путь к вашему изображению */
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: sans-serif;
+        }
+        #site-button {
+            background-color: #4CAF50; /* Зеленый фон */
+            color: white; /* Белый текст */
+            padding: 10px 20px; /* Отступы */
+            text-decoration: none; /* Убираем подчеркивание */
+            border-radius: 5px; /* Скругленные углы */
+            border: none; /* Убираем рамку */
+            cursor: pointer; /* Изменяем курсор */
+            margin-top: 20px; /* Отступ сверху */
+        }
+
+        #message {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(20, 20, 20); /* Цвет текста ответа */
+            background-color: #f0f0f0; /* Добавляем светло-серый фон */
+            padding: 10px; /* Добавляем внутренние отступы */
+        }
+    </style>
+</head>
+<body>
+    <h1>WELCOME TO OUR BAKERY!</h1>
+    <input type="text" id="message">
+    <button onclick="sendMessage()">Send</button>
+    <div id="response"></div>
+    <button id="site-button" onclick="window.open('https://landbot.pro/v3/H-2789559-NQ0T9MFJZYM893PD/index.html', '_blank')"> לראות את המוצרים שלנו</button>
+    <script>
+      function sendMessage() {
+          const message = document.getElementById("message").value;
+          fetch("/", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ message: message })
+          })
+          .then(response => response.json())
+          .then(data => {
+              document.getElementById("response").innerHTML = data.response;
+              document.getElementById("message").value = ""; // Очищаем поле ввода
+          });
+      }
+  </script>
+</body>
+</html>

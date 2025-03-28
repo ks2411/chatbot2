@@ -13,7 +13,7 @@ NUM_CHUNKS = 7
 CHUNK_SIZE = 200
 CHUNK_OVERLAP = 0
 TEMP = 0
-VERBOSE = 1
+VERBOSE = 0
 
 # URL базы знаний
 KNOWLEDGE_DB_URL = 'https://docs.google.com/document/d/1o1wDpGLLRupCIsy7BLctJLxs9UHCZMZuCfMLH49VSg0/edit?usp=sharing'

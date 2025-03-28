@@ -8,7 +8,7 @@ from utils import remove_newlines
 
 
 
-def get_hello(model, user_message, temp=TEMP, verbose=VERBOSE):
+def get_hello(model, user_message, temp=0, verbose=VERBOSE):
     """Определяет, есть ли приветствие в первом сообщении клиента и возвращает его."""
 
     system_prompt = '''
@@ -37,13 +37,18 @@ def summarize_dialog(dialog, history, temp=TEMP, verbose=VERBOSE, model=MODEL):
     system_prompt = '''
     אתה מתקן-על (סופר-קורקטור), שיודע להדגיש בדיאלוגים את כל הדברים החשובים ביותר 
     משימתך: ליצור סיכום מלא ומדויק על בסיס ההיסטוריה של ההודעות הקודמות בדיאלוג ועל בסיס ההודעות האחרונות.
-    אתה בשום אופן לא ממציא כלום ורק מסתמך על השיחה.
+    אתה בשום אופן לא ממציא כלום ורק מסתמך על השיחה.תמיד תענה ללקוח בשפה שלו
+    אל תתחנף יותר מדי ללקוח תהיה ענייני וקצר
+    בשום אופן אל תוסיף כלום חוץ מאינפורמציה שקיבלת
+   
     '''
 
-    user_prompt = f'''
+    user_prompt = f'''תמיד תענה ללקוח בשפה של
     סכם את הדיאלוג מבלי להוסיף שום דבר מדמיונך.
     היסטוריית ההודעות הקודמות בדיאלוג: {dialog}.
     ההודעות האחרונות: {last_statements}.
+        בשום אופן אל תוסיף כלום חוץ מאינפורמציה שקיבלת
+
     '''
 
     messages = [
@@ -74,7 +79,9 @@ def remove_greeting(text):
 
     system_prompt = '''
     אתה עורך טקסטים מצוין וטוב יותר מכולם במציאת ברכת פתיחה בטקסט.
-    אם יש ברכת פתיחה, удали אותה והחזר רק את הטקסט שנותר.
+    אם יש ברכת פתיחה, תסלק אותה והחזר רק את הטקסט שנותר.
+        בשום אופן אל תוסיף כלום חוץ מאינפורמציה שקיבלת
+
     '''
 
     messages = [
@@ -83,7 +90,7 @@ def remove_greeting(text):
     ]
 
     response = openai.chat.completions.create(
-        model=MODEL, messages=messages, temperature=TEMP
+        model=MODEL, messages=messages, temperature=0
     )
 
     return response.choices[0].message.content

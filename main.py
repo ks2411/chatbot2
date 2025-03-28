@@ -1,18 +1,24 @@
-#main.py
+from flask import Flask, request, render_template, jsonify
 from sales_bot import get_seller_answer
 
-if __name__ == "__main__":
-   if __name__ == "__main__":
-    history_user = []
-    history_manager = []
-    history_chat = []
+app = Flask(__name__)
 
-    while True:
-        user_message = input()  # Запрашиваем сообщение от пользователя
+history_user = []
+history_manager = []
+history_chat = []
+
+@app.route("/", methods=["GET", "POST"])
+def chat():
+    global history_user, history_manager, history_chat
+
+    if request.method == "POST":
+        user_message = request.get_json().get("message")
+
+        if not user_message:
+            return jsonify({"error": "Message is required"}), 400
 
         if user_message.lower() in ["выход", "exit", "quit"]:
-            print("Chat closed")
-            break
+            return jsonify({"response": "Chat closed"}), 200
 
         response = get_seller_answer(
             history_user=history_user + [user_message],
@@ -20,9 +26,13 @@ if __name__ == "__main__":
             history_chat=history_chat + [user_message]
         )
 
-        print( response)
-
-        # Добавляем сообщение в историю чата
         history_user.append(user_message)
         history_chat.append(user_message)
         history_chat.append(response)
+
+        return jsonify({"response": response}), 200
+
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
