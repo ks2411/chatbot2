@@ -1419,16 +1419,20 @@ def chat():
 
         if client_question.lower() in ["выход", "exit", "quit"]:
             return jsonify({"response": "Chat closed"}), 200
-    without_hello = get_seller_answer(history_user, history_manager, history_chat)
-    response =  get_seller_answer(history_user, history_manager, history_chat)
-    
-    history_chat.append(f"Менеджер: {without_hello}")
-    history_manager.append(without_hello) # не будем Василия хранить в истории, чтобы не путать gpt лишними именами
 
+        without_hello = get_seller_answer(history_user, history_manager, history_chat)
+        response = get_seller_answer(history_user, history_manager, history_chat)
 
-    return jsonify({"response": response}), 200
+        history_chat.append(f"Менеджер: {without_hello}")
+        history_manager.append(without_hello)
 
-    
+        return jsonify({"response": response}), 200
+
+    else:
+        history_user.append("Привет, бот!") # Добавляем сообщение при GET-запросе
+        without_hello = get_seller_answer(history_user, history_manager, history_chat)
+        
+        return render_template("index.html") # Загружаем HTML-страницу
 
 if __name__ == "__main__":
-   app.run(host="0.0.0.0", port=10000, debug=True)  # Указываем порт явно (10000)
+    app.run(host="0.0.0.0", port=10000, debug=True)
