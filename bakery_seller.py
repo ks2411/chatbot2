@@ -70,7 +70,6 @@ chunk_size = 200
 chunk_overlap = 0
 temp = 0
 verbose = 1
-knowledge_db_url = 'https://docs.google.com/document/d/17KU38YHm5qUwPSjJPiB3NtRtdFpvO-cK77PWwKEXj5E'
 
 #@title Объявляем переменные
 history_chat = []
@@ -424,8 +423,8 @@ def split_text(text, max_count, chunk_overlap):
 
     return source_chunks
 # @title Загружаем Базу Знаний, индексируем, сохраняем индексы
-
-filepath = os.path.join("static", "shop_catalog.txt")
+current_dir = os.getcwd()
+filepath = os.path.join(current_dir, "static", "shop_catalog.txt")
 with open(filepath, "r", encoding="utf-8") as f:
     knowledge_db_txt = f.read()
 
