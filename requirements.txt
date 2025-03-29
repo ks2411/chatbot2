@@ -7,3 +7,4 @@ tiktoken==0.7.0
 httpx
 Flask
 gunicorn
+flask_cors
