@@ -2,7 +2,26 @@
 <html>
 <head>
     <title>Sales Bot Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+            /* Стили для настольных компьютеров */
+      #message {
+            width: 50%;
+        }
+        
+        #response {
+            width: 70%;
+        }
+
+        /* Медиа-запрос для мобильных устройств */
+        @media (max-width: 600px) {
+            #message {
+                width: 90%;
+            }
+            #response {
+                width: 60%;
+            }
+        }
         body {
             display: flex;
             flex-direction: column;
@@ -58,7 +77,7 @@
     <script>
       function sendMessage() {
           const message = document.getElementById("message").value;
-          fetch("/", {
+          fetch("http://127.0.0.1:10000/", {
               method: "POST",
               headers: {
                   "Content-Type": "application/json"
